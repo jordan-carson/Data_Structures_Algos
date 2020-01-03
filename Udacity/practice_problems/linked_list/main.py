@@ -72,4 +72,4 @@ if __name__ == '__main__':
     head = create_linked_list(input_list)
     test_function(input_list, head)
     # ll = create_linked_list()
-    print(head2.to_list())
+    # print(head2.to_list())
