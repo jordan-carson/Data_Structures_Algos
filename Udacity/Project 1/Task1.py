@@ -18,13 +18,22 @@ How many different telephone numbers are there in the records?
 Print a message:
 "There are <count> different telephone numbers in the records."
 """
-unique = set()
-for text in texts:
-    unique.add(text[0])
-    unique.add(text[1])
+
+
+def print_task1(unique_set, formatter=52):
+    print(f'There are {len(unique_set)} different telephone numbers in the records.')
+
+# Declare variables
+unique_phone_numbers = set()
 
 for call in calls:
-    unique.add(call[0])
-    unique.add(call[1])
+    unique_phone_numbers.add(call[0])
+    unique_phone_numbers.add(call[1])
 
-print(len(unique))
+for text in texts:
+    unique_phone_numbers.add(text[0])
+    unique_phone_numbers.add(text[1])
+
+
+if __name__ == '__main__':
+    print_task1(unique_phone_numbers)

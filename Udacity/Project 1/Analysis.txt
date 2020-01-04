@@ -1,0 +1,41 @@
+Jordan Carson
+Data Scientist at BNP Paribas
+
+Project 1: Unscramble Computer Science Problems
+
+Task 0:
+Time Complexity: O(1)
+Comment: 
+We are explicitly searching for the first and last items in a list. 
+Getting an item from a python list is a O(1) time complexity, for both the best and worst case. 
+We are not creating any new data structures, thus the space complexity is not needed for this answer. 
+
+Task 1:
+Time Complexity: O(n)
+Space Complexity: O(n)
+Comment: 
+We are looping through all the calls and texts (two lists) in two separate for-loops. 
+Thus, our program sees all rows within the calls and texts lists. 
+We can say our program runs at an order of O(t+c), where t is all the texts, and c is all the calls. 
+If we substitute t and c for N then our program runtime analysis will be O(2n), which reduces to O(n). 
+Thus, this program runs linearly based on the the number of calls and texts in our dataset. 
+
+Task 2: 
+Time Complexity: O(n)
+Space Complexity: O(n)
+Comment: We loop through all the calls once, thus the program runs with a runtime of O(n). Where n is the length of the calls list. 
+
+Task 3:
+Time Complexity: O(n + n log n)
+Space Complexity: O(n)
+Comment: 
+In this program, we are looping through all the calls where the outgoing call matches the '(080)'. 
+We then sort all the keys in our final dictionary, which has a worst-case runtime of n log n. Thus our program has a runtime order of O(n + n log n). 
+
+Task 4:
+Time Complexity: O(n + n log n)
+Space Complexity: O(n)
+Comment: 
+In this program, we are looping through both the calls and texts, which we know has a runtime of O(n). 
+At the end of our program we sort the final list using the built-in sorted function, which has a worst-time of n log n. 
+Thus our task 4 has a runtime of O(n + n log n). The space complexity is O(n) as we are using a set. 

@@ -20,5 +20,11 @@ Print messages:
 "Last record of calls, <incoming number> calls <answering number> at time <time>, lasting <during> seconds"
 """
 
-print("First record of texts, {0} texts {1} at time {2}.".format(*texts[0]))
-print("Last record of caPATH=$PATH:lls, {0} calls {1} at time {2}, lasting {3} seconds.".format(*calls[-1]))
+def print_task0(t, c):
+    print(f"First record of texts, {t[0][0]} texts {t[0][1]} at time {t[0][2]}.")
+    print(f"Last record of calls, {c[-1][0]} calls {c[-1][1]} at time {c[-1][2]}, lasting {c[-1][3]} seconds.")
+
+
+if __name__ == '__main__':
+    print_task0(texts, calls)
+
