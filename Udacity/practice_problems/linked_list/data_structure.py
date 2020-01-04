@@ -4,6 +4,13 @@ class Node:
         self.next = None
 
 
+class DoubleNode:
+    def __init__(self, value):
+        self.value = value
+        self.next = None
+        self.previous = None
+
+
 class LinkedList:
 
     def __init__(self):
@@ -23,12 +30,30 @@ class LinkedList:
         return
 
     def to_list(self):
-        new_list = list()
+        out_list = []
         node = self.head
-        while node is not None:
-            new_list.append(node.value)
+        while node:
+            out_list.append(node.value)
             node = node.next
-        return new_list
+
+        return out_list
+
+
+class DoublyLinkedList:
+    def __init__(self):
+        self.head = None
+        self.tail = None
+
+    def append(self, value):
+        if self.head is None:
+            self.head = DoubleNode(value)
+            self.tail = self.head
+            return
+
+        self.tail.next = DoubleNode(value)
+        self.tail.next.previous = self.tail
+        self.tail = self.tail.next
+        return
 
 
 if __name__ == '__main__':
@@ -42,3 +67,22 @@ if __name__ == '__main__':
 
     print(linked_list.to_list())
     print("Pass" if (linked_list.to_list() == [3, 2, -1, 0.2]) else "Fail")
+
+    linked_list = DoublyLinkedList()
+    linked_list.append(1)
+    linked_list.append(-2)
+    linked_list.append(4)
+
+    print("Going forward through the list, should print 1, -2, 4")
+    node = linked_list.head
+    while node:
+        print(node.value)
+        node = node.next
+
+    print("\nGoing backward through the list, should print 4, -2, 1")
+    node = linked_list.tail
+    while node:
+        print(node.value)
+        node = node.previous
+
+
