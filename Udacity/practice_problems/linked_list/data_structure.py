@@ -1,3 +1,6 @@
+import uuid
+
+
 class Node:
     def __init__(self, value):
         self.value = value
@@ -11,7 +14,7 @@ class DoubleNode:
         self.previous = None
 
 
-class LinkedList:
+class LinkedListNaive:
 
     def __init__(self):
         self.head = None
@@ -39,30 +42,90 @@ class LinkedList:
         return out_list
 
 
-class LinkedListPractice:
+# Solution
+class LinkedList:
     def __init__(self):
         self.head = None
 
-    def prepend(self, value):
-        """ Prepend a value to the beginning of the list. """
+    def __iter__(self):
+        node = self.head
+        while node:
+            yield node.value
+            node = node.next
 
-        # TODO: Write function to prepend here
+    def __reversed__(self):
+        return self.reverse()
+
+    def __repr__(self):
+        return str([v for v in self])
+
+    def __str__(self):
+        return self.__repr__()
+
+    def __eq__(self, other):
+        iter_node_A = self.head
+        iter_node_B = other.head
+        while iter_node_A and iter_node_B:
+            if iter_node_A.data != iter_node_B.data:
+                return False
+            iter_node_A = iter_node_A.next
+            iter_node_B = iter_node_B.next
+        if not iter_node_A and not iter_node_B:
+            return True
+        else:
+            return False
+
+    def __len__(self):
+        return self.size()
+
+    def __getitem__(self, item):
+        if not self.head:
+            return None
+        if item > len(self):
+            raise IndexError
+        else:
+            node = self.head
+            index = 0
+            while node and index <= item:
+                if index == item:
+                    return node.value
+
+                index += 1
+                node = node.next
+        raise IndexError    # just in case
+
+    def prepend(self, value):
+        """ Prepend a node to the beginning of the list
+
+        Example:
+            >>> LinkedList([4, 3]).prepend(5)
+            [4, 3] -> [5, 4, 3]
+
+        Explanation: we prepend the 5 to the beginning of the list, setting the new head equal to the new value
+        and swapping the head to be the next node. The head already has reference to the other existing nodes within
+        the LinkedList.
+
+        """
 
         if self.head is None:
             self.head = Node(value)
             return
 
+        # set the head equal to the new Node(value)
         new_head = Node(value)
+
+        # then set the previous head equal to the next node,
         new_head.next = self.head
+
+        # finally change the head to the new head
         self.head = new_head
 
     def append(self, value):
-        """ Append a value to the end of the list. """
+        """ Append a node to the end of the list """
         if self.head is None:
             self.head = Node(value)
             return
 
-        # move to the tail
         node = self.head
         while node.next:
             node = node.next
@@ -71,8 +134,6 @@ class LinkedListPractice:
 
     def search(self, value):
         """ Search the linked list for a node with the requested value and return the node. """
-
-        # TODO: Write function to search here
         if self.head is None:
             return None
 
@@ -81,43 +142,40 @@ class LinkedListPractice:
             if node.value == value:
                 return node
             node = node.next
-        # if we get here the value does not exist
-        raise ValueError("Value does not exist in the LinkedList")
+
+        raise ValueError("Value not found in the list.")
 
     def remove(self, value):
-        """ Remove first occurrence of value. """
-
-        # TODO: Write function to remove here
+        """ Delete the first node with the desired data. """
         if self.head is None:
             return
 
-            # head node is not None, test to see if the head value equals the value to remove
         if self.head.value == value:
             self.head = self.head.next
             return
-        node = self.head
 
+        node = self.head
         while node.next:
             if node.next.value == value:
                 node.next = node.next.next
                 return
             node = node.next
 
-        raise ValueError("Value does not exist in the list.")
+        raise ValueError("Value not found in the list.")
 
     def pop(self):
         """ Return the first node's value and remove it from the list. """
         if self.head is None:
             return None
+
         node = self.head
         self.head = self.head.next
+
         return node.value
 
     def insert(self, value, pos):
         """ Insert value at pos position in the list. If pos is larger than the
             length of the list, append to the end of the list. """
-
-        # TODO: Write function to insert here
         if pos == 0:
             self.prepend(value)
             return
@@ -135,17 +193,15 @@ class LinkedListPractice:
             node = node.next
         else:
             self.append(value)
-        # pass
 
     def size(self):
         """ Return the size or length of the linked list. """
-
-        # TODO: Write function to get size here
         size = 0
         node = self.head
         while node:
             size += 1
             node = node.next
+
         return size
 
     def to_list(self):
@@ -155,6 +211,43 @@ class LinkedListPractice:
             out.append(node.value)
             node = node.next
         return out
+
+    def reverse(self):
+        new_list = self
+        prev_node, next_node = None, None
+        for val in linked_list:
+            new_node = Node(val)
+            new_node.next = prev_node
+            prev_node = new_node
+        new_list.head = prev_node
+        return new_list
+
+    def iscircular(self):
+        """
+        Determine whether the Linked List is circular.
+
+        Returns:
+           bool: Return True if the linked list is circular, return False otherwise
+        """
+
+        if self.head is None:
+            return False
+
+        slow = self.head
+        fast = self.head
+
+        while fast and fast.next:
+            # slow pointer moves one node
+            slow = slow.next
+            # fast pointer moves two nodes
+            fast = fast.next.next
+
+            if slow == fast:
+                return True
+
+        # If we get to a node where fast doesn't have a next node or doesn't exist itself,
+        # the list has an end and isn't circular
+        return False
 
 
 class DoublyLinkedList:
@@ -204,7 +297,7 @@ if __name__ == '__main__':
         node = node.previous
 
     # Test prepend
-    linked_list = LinkedListPractice()
+    linked_list = LinkedList()
     linked_list.prepend(1)
     assert linked_list.to_list() == [1], f"list contents: {linked_list.to_list()}"
     linked_list.append(3)
@@ -213,12 +306,13 @@ if __name__ == '__main__':
     print('Pass: LinkedList Prepend.\n' if (linked_list.to_list() == [2, 1, 3]) else 'False')
 
     # Test append
-    linked_list = LinkedListPractice()
+    linked_list = LinkedList()
     linked_list.append(1)
     assert linked_list.to_list() == [1], f"list contents: {linked_list.to_list()}"
     linked_list.append(3)
     assert linked_list.to_list() == [1, 3], f"list contents: {linked_list.to_list()}"
     print('Pass: LinkedList Append.\n' if (linked_list.to_list() == [1, 3]) else 'False')
+
     # Test search
     linked_list.prepend(2)
     linked_list.prepend(1)
@@ -226,7 +320,6 @@ if __name__ == '__main__':
     linked_list.append(3)
     assert linked_list.search(1).value == 1, f"list contents: {linked_list.to_list()}"
     assert linked_list.search(4).value == 4, f"list contents: {linked_list.to_list()}"
-
 
     # Test remove
     linked_list.remove(1)
@@ -251,3 +344,9 @@ if __name__ == '__main__':
 
     # Test size
     assert linked_list.size() == 5, f"list contents: {linked_list.to_list()}"
+
+    print(linked_list)
+
+    print(reversed(linked_list))
+
+    print(type(linked_list))
