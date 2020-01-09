@@ -11,7 +11,6 @@ def factorial(n):
     """
     if n == 0:
         return 1
-    # TODO: Write your recursive factorial function here
     return n * factorial(n - 1)
 
 
