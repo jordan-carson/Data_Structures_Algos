@@ -5,8 +5,6 @@ def is_palindrome(input):
     Args:
        input(str): input to be checked if it is palindrome
     """
-
-    # TODO: Write your recursive palindrome checker here
     if len(input) <= 1:
         return True
     else:
