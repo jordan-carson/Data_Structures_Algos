@@ -1,5 +1,5 @@
 import uuid
-
+import numpy as np
 
 class Node:
     def __init__(self, value):
@@ -44,8 +44,11 @@ class LinkedListNaive:
 
 # Solution
 class LinkedList:
-    def __init__(self):
+    def __init__(self, init_list=None):
         self.head = None
+        # if input_list:
+        #     for item in input_list:
+        #         self.append(item)
 
     def __iter__(self):
         node = self.head
@@ -93,6 +96,14 @@ class LinkedList:
                 index += 1
                 node = node.next
         raise IndexError    # just in case
+
+    def __add__(self, other):
+        for i in range(len(other)):
+            self.append(other[i])
+        return self
+
+    def __radd__(self, other):
+        return self.__add__(other)
 
     def prepend(self, value):
         """ Prepend a node to the beginning of the list
@@ -146,7 +157,15 @@ class LinkedList:
         raise ValueError("Value not found in the list.")
 
     def remove(self, value):
-        """ Delete the first node with the desired data. """
+        """
+        Delete the first node with the desired data.
+        @param value: the node.value to find
+        @return: This operation doesn't need to return anything, just properly remove the given value from the
+        LinkedList.
+        
+        Example:
+            >>> LinkedList([1, 3]).remove(3)
+        """
         if self.head is None:
             return
 
@@ -164,7 +183,13 @@ class LinkedList:
         raise ValueError("Value not found in the list.")
 
     def pop(self):
-        """ Return the first node's value and remove it from the list. """
+        """ Return the first node's value and remove it from the list. 
+        @return: the first node.value
+
+        Example:
+            >>> LinkedList([1, 3]).pop()
+            >>> LinkedList([3])
+        """
         if self.head is None:
             return None
 
@@ -205,12 +230,23 @@ class LinkedList:
         return size
 
     def to_list(self):
+        """
+        Translate the LinkedList into an list based data structure.
+        @return: List based data structure
+        """
         out = []
         node = self.head
         while node:
             out.append(node.value)
             node = node.next
         return out
+
+    def to_array(self):
+        """
+        Translate the LinkedList into a <class 'numpy.ndarray'>, using numpy.
+        @return: <numpy.ndarray>
+        """
+        return np.array(self.to_list())
 
     def reverse(self):
         new_list = self
@@ -297,13 +333,14 @@ if __name__ == '__main__':
         node = node.previous
 
     # Test prepend
-    linked_list = LinkedList()
-    linked_list.prepend(1)
-    assert linked_list.to_list() == [1], f"list contents: {linked_list.to_list()}"
-    linked_list.append(3)
-    linked_list.prepend(2)
-    assert linked_list.to_list() == [2, 1, 3], f"list contents: {linked_list.to_list()}"
-    print('Pass: LinkedList Prepend.\n' if (linked_list.to_list() == [2, 1, 3]) else 'False')
+    linked_list_1 = LinkedList()
+    linked_list_1.prepend(1)
+    print(linked_list_1)
+    assert linked_list_1.to_list() == [1], f"list contents: {linked_list_1.to_list()}"
+    linked_list_1.append(3)
+    linked_list_1.prepend(2)
+    assert linked_list_1.to_list() == [2, 1, 3], f"list contents: {linked_list_1.to_list()}"
+    print('Pass: LinkedList Prepend.\n' if (linked_list_1.to_list() == [2, 1, 3]) else 'False')
 
     # Test append
     linked_list = LinkedList()
@@ -346,7 +383,30 @@ if __name__ == '__main__':
     assert linked_list.size() == 5, f"list contents: {linked_list.to_list()}"
 
     print(linked_list)
-
     print(reversed(linked_list))
-
     print(type(linked_list))
+    ll2 = LinkedList()
+    ll2.append(3)
+    ll2.prepend(1)
+    print(ll2)
+    print(ll2.pop())
+    print(ll2)
+    new_list = LinkedList()
+    alist = [1,2,3,4,5]
+    for item in alist:
+        new_list.append(item)
+
+    print(alist)
+
+    # print(type(new_list.to_array()))
+
+    # LinkedList([1, 3]).remove(3)
+
+    print(new_list)
+    b = new_list + new_list
+    print(b)
+
+    c = b + new_list + new_list
+    print(c)
+
+

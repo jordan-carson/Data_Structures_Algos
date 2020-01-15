@@ -11,7 +11,3 @@ def print_integers(n):
         return
     print(n)
     print_integers(n - 1)
-
-
-
-print(power_of_2(5))

@@ -10,24 +10,7 @@ def print_linked_list(head):
         current_node = current_node.next
 
 
-def create_linked_list(input_list):
-    """
-    Function to create a linked list
-    @param input_list:
-    @return:
-    """
-    head = None
 
-    for value in input_list:
-        if head is None:
-            head = Node(value)
-        else:
-            current_node = head
-            while current_node.next:
-                current_node = current_node.next
-            current_node.next = Node(value)
-
-    return head
 
 
 if __name__ == '__main__':
