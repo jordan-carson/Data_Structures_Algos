@@ -97,11 +97,16 @@ class LRU_Cache:
         #     self.tail = self.head if self.head.prev is None else None
         #     self.head = node
         # self.num_elements += 1
+        # print('Adding the new node', node.value)
         if self.head is None:
             self.head, self.tail = node, node
         else:
+            # if self.head.next:
+            #     print('self.head.next', self.head.next.value)
             self.head.next = node
+
             node.prev = self.head
+
             if self.head.prev is None:
                 self.tail = self.head
             self.head = node
@@ -119,8 +124,9 @@ class LRU_Cache:
             self.tail.next.prev = None
             self.tail = self.tail.next
         else:
-            node.prev.next = node.next
-            node.next.prev = node.prev
+            # node.prev.next = node.next
+            # node.next.prev = node.prev
+            node.prev.next, node.next.prev = node.next, node.prev
         # pass
 
     def _remove_lru(self):
@@ -132,45 +138,39 @@ class LRU_Cache:
         self._remove_node(self.tail)
         self.num_elements -= 1
 
-
-if __name__ == '__main__':
-    our_cache = LRU_Cache(5)
-    our_cache.set(1, 1)
-    our_cache.set(2, 2)
-    our_cache.set(3, 3)
-    our_cache.set(4, 4)
-
-    print(our_cache.get(1))
-    print(our_cache.get(2))
-    print(our_cache.get(9))
-
-    print(our_cache)
-
+    def print_elements(self):
+        n = self.head
+        # print("[head = %s, end = %s]" % (self.head.value, self.tail.value), end=" ")
+        while n:
+            print("%s -> " % (n.value), end="")
+            n = n.prev
+        print("NULL")
 
 
 if __name__ == '__main__':
 
     our_cache = LRU_Cache(5)
 
-    our_cache.set(1, 1)
-    our_cache.set(2, 2)
-    our_cache.set(3, 3)
-    our_cache.set(4, 4)
-    our_cache.set(5, 5)
-
-    our_cache.print_elements()
-
-    print(our_cache.get(3))       # returns 1
-    our_cache.print_elements()
-    #
-    # our_cache.get(2)       # returns 2
-    # our_cache.get(9)      # returns -1 because 9 is not present in the cache
-    #
+    our_cache.set(1, 4)
+    our_cache.set(2, 3)
+    our_cache.set(3, 5)
+    # our_cache.set(4, 4)
     # our_cache.set(5, 5)
-    # our_cache.set(6, 6)
+
+    our_cache.print_elements()
+
+    # print(our_cache.get(3))       # returns 1
+    # print(our_cache)
+    #
+    our_cache.get(2)       # returns 2
+    our_cache.get(9)      # returns -1 because 9 is not present in the cache
+    #
+    our_cache.set(5, 5)
+    our_cache.set(6, 6)
     # our_cache.get(3)      # returns -1 because the cache reached it's capacity and 3 was the least recently used entry
     # our_cache.print_elements()
     #
+    our_cache.print_elements()
     # print(our_cache.get(6))
     #
     # our_cache.print_elements()
