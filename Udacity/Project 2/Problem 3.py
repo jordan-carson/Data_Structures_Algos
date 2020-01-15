@@ -1,11 +1,43 @@
-class HuffmanCodingNode:
+class HuffmanNode:
     def __init__(self, char, frequency):
         self.char = char
         self.freq = frequency
         self.left, self.right = None, None
 
+    def is_leaf(self):
+        return not (self.left or self.right)
+
+    def is_right(self):
+        return self.right is True
+
+    def is_left(self):
+        return self.left is True
+
 
 class HuffmanCoding:
+    """
+    A Huffman code is a type of optimal prefix code that is used for compressing data.
+    The Huffman encoding and decoding schema is also lossless, meaning that when compressing the data to
+    make it smaller, there is no loss of information.
+
+    The Huffman algorithm works by assigning codes that correspond to the relative frequency of each
+    character for each character. The Huffman code can be of any length and does not require a prefix;
+    therefore, this binary code can be visualized on a binary tree with each encoded character being stored on leafs.
+
+    There are many types of pseudocode for this algorithm. At the basic core, it is comprised of building
+    a Huffman tree, encoding the data, and, lastly, decoding the data.
+
+    Here is one type of pseudocode for this coding schema:
+
+            Take a string and determine the relevant frequencies of the characters.
+            Build and sort a list of tuples from lowest to highest frequencies.
+            Build the Huffman Tree by assigning a binary code to each letter, using shorter codes for the more
+                frequent letters. (This is the heart of the Huffman algorithm.)
+            Trim the Huffman Tree (remove the frequencies from the previously built tree).
+            Encode the text into its compressed form.
+            Decode the text from its compressed form.
+            You then will need to create encoding, decoding, and sizing schemas.
+    """
     def encode(self):
         pass
 
@@ -19,7 +51,7 @@ class HuffmanCoding:
                 freq[ch] = 1
             else:
                 freq[ch] += 1
-        return [HuffmanCodingNode(temp_ch, temp_freq) for temp_ch, temp_freq in freq.items()] if not as_dict else freq
+        return [HuffmanNode(temp_ch, temp_freq) for temp_ch, temp_freq in freq.items()] if not as_dict else freq
 
     def _sort_frequencies(self, text):
         return sorted(self._create_frequencies(text), key=lambda x: x.freq, reverse=True)

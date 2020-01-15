@@ -34,6 +34,15 @@ class LinkedList:
                 return True
         return False
 
+    def __add__(self, other):
+        """ Add two linked list together."""
+        llist = LinkedList()
+        for item in self:
+            llist.append(item)
+        for item in other:
+            llist.append(item)
+        return llist
+
     def union(self, other):
         """ Simple union all between self and other."""
         union = LinkedList()
