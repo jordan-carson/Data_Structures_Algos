@@ -14,7 +14,6 @@ class Solution:
         return ''.join(output)
 
 
-
 #
 print(Solution().defangIPaddr('255.100.50.0'))
 #
