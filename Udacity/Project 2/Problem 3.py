@@ -92,6 +92,6 @@ def text_to_frequency_dict(text):
 
 
 if __name__ == '__main__':
-    text_to_frequency_dict('jordan')
+    text_to_frequency_dict('Notes')
 
-    print(HuffmanCoding()._sort_frequencies('jordan carson'))
+    print(HuffmanCoding()._sort_frequencies('Notes carson'))

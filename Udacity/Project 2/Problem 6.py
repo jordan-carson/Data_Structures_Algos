@@ -43,6 +43,25 @@ class LinkedList:
             llist.append(item)
         return llist
 
+    def union1(self, other):
+        """ Simple union all between self and other."""
+        hashmap = dict()
+        union = LinkedList()
+        for item in self:
+            if item not in hashmap.keys():
+                union.append(item)
+                hashmap[item] = 1
+            else:
+                hashmap[item] +=1
+
+        for item in other:
+            if item not in hashmap.keys():
+                union.append(item)
+                hashmap[item] = 1
+            else:
+                hashmap[item] +=1
+        return union, hashmap
+
     def union(self, other):
         """ Simple union all between self and other."""
         union = LinkedList()
@@ -55,12 +74,15 @@ class LinkedList:
                 union.append(item)
         return union
 
+
     def intersection(self, other):
         """ Simple inner join between self and other. """
         new = LinkedList()
         for value in self:
-            if other.__contains__(value):
-                if not new.__contains__(value):
+            # if other.__contains__(value):
+            if value in other:
+                # if not new.__contains__(value):
+                if value not in new:
                     new.append(value)
 
         return new
@@ -93,7 +115,25 @@ def union(list1, list2):
     Algo:
         Loop through both lists and append items to new LinkedList
     """
+    import time
+    sta = time.time()
+    # union, map =
+    x = list1.union(list2)
+    print(time.time() - sta)
     return list1.union(list2)
+
+def union1(list1, list2):
+    """
+    Union between two lists are all the unique elements in list1 and list2.
+    Algo:
+        Loop through both lists and append items to new LinkedList
+    """
+    import time
+    sta = time.time()
+    # union, map =
+    x = list1.union1(list2)
+    print(time.time() - sta)
+    return list1.union1(list2)
 
 
 def intersection(list1, list2):
@@ -118,6 +158,13 @@ if __name__ == '__main__':
 
     element_1 = [3, 2, 4, 35, 6, 65, 6, 4, 3, 21]
     element_2 = [6, 32, 4, 9, 6, 1, 11, 21, 1]
+    import random
+
+    Start = 9
+    Stop = 99
+    limit = 10
+    import random
+    print([i for i in random.sample(range(Start, Stop), limit)])
 
     for i in element_1:
         linked_list_1.append(i)
@@ -125,7 +172,12 @@ if __name__ == '__main__':
     for i in element_2:
         linked_list_2.append(i)
 
-    print(union(linked_list_1, linked_list_2)) # 3 -> 2 -> 4 -> 35 -> 6 -> 65 -> 21 -> 32 -> 9 -> 1 -> 11 ->
+    # print(linked_list_1, linked_list_2)
+    print('First', union(linked_list_1, linked_list_2)) # 3 -> 2 -> 4 -> 35 -> 6 -> 65 -> 21 -> 32 -> 9 -> 1 -> 11 ->
+    print('Second', union1(linked_list_1, linked_list_2))  # 3 -> 2 -> 4 -> 35 -> 6 -> 65 -> 21 -> 32 -> 9 -> 1 -> 11 ->
+
+
+
     print(intersection(linked_list_1, linked_list_2))
 
     # Test case 2
