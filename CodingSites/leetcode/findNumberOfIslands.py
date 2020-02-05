@@ -65,7 +65,8 @@ class Solution:
 # iterate over the 2d array, and every time we find an island (which is a group of 1's horizontally
 # or vertically, create a counter and increment it if we find an island
 # if we find a 1 next to another one on the same row, or within an adjacent column we should put them
-# as water so we do not mess up our counter
+# as water so we do not mess up our counter, ypothetically
+
     def append_if(self, queue, x, y):
         """Append to the queue only if in bounds of the grid and the cell value is 1."""
         if x < len(self.grid) and y < len(self.grid[0]):
@@ -92,10 +93,10 @@ class Solution:
         :rtype: int
         """
 
-        if not grid or len(grid) == 0 or len(grid[0]) == 0:
+        if not grid or len(grid) == 0 or len(grid[0]) == 0: # base case
             return 0
 
-        self.grid = grid
+        self.grid = grid # get our grid
 
         row_length = len(grid)
         col_length = len(grid[0])
@@ -103,11 +104,11 @@ class Solution:
         island_counter = 0
         for row in range(row_length):
             for col in range(col_length):
-                if self.grid[row][col] == '1':
+                if self.grid[row][col] == '1': # find the ones
                     # found an island
-                    island_counter += 1
+                    island_counter += 1 # increment our counter
 
-                    self.mark_neighbors(row, col)
+                    self.mark_neighbors(row, col) # then mark the neeighbords so we know we already visited this island
 
         return island_counter
 
