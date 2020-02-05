@@ -66,6 +66,12 @@ class Solution:
 # or vertically, create a counter and increment it if we find an island
 # if we find a 1 next to another one on the same row, or within an adjacent column we should put them
 # as water so we do not mess up our counter, ypothetically
+    def __init__(self, grid):
+        self.grid = grid
+
+        # didint use
+        self.x_len = len(self.grid)
+        self.y_len = len(self.grid[0])
 
     def append_if(self, queue, x, y):
         """Append to the queue only if in bounds of the grid and the cell value is 1."""
@@ -87,19 +93,19 @@ class Solution:
             self.append_if(queue, x + 1, y) #up
             self.append_if(queue, x, y + 1) #right
 
-    def numIslands(self, grid):
+    def numIslands(self):
         """
         :type grid: List[List[str]]
         :rtype: int
         """
 
-        if not grid or len(grid) == 0 or len(grid[0]) == 0: # base case
+        if not self.grid or len(self.grid ) == 0 or len(self.grid [0]) == 0: # base case
             return 0
 
-        self.grid = grid # get our grid
+        # self.grid = grid # get our grid
 
-        row_length = len(grid)
-        col_length = len(grid[0])
+        row_length = len(self.grid)
+        col_length = len(self.grid[0])
 
         island_counter = 0
         for row in range(row_length):
@@ -118,13 +124,18 @@ test_case = [
     ['1','1','0','0','0'],
     ['0','0','0','0','1']
 ]
-print(Solution().numIslands(test_case))
+print(Solution(test_case).numIslands())
 
 
+test_case = [
+    ['1','1','0','0','0'],
+    ['1','1','0','0','1'],
+    ['1','0','0','0','1'],
+    ['0','0','1','0','1']
+]
 
 
-
-
+print(Solution(test_case).numIslands())
 
 
 
