@@ -9,7 +9,7 @@ class LRU_Cache:
     """
     Least Recently Used Cache
 
-    Notes:
+    Engineering:
         While doing the get() operation, if the entry is found in the cache, it is known as a cache hit. If however,
         the entry is not found, it is known as a cache miss.
 

@@ -1,7 +1,6 @@
 
 
 def bubble(arr):
-
     for i in range(len(arr)):
         for index in range(1, len(arr)):
             this = arr[index]
@@ -11,10 +10,12 @@ def bubble(arr):
             arr[index], arr[index - 1] = prev, this
     return arr
 
+
 def swap(a, b):
     # if a > b:
     a, b = b, a
     return a, b
+
 
 def bubble_sort(arr):
 

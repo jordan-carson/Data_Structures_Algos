@@ -133,7 +133,7 @@ class HuffmanCoding:
         huff_map = self._create_encoding_dict(tree, '')
         output = dict()
         for ch in text:
-            output[ch] = [self.frequency_dict[ch], huff_map[ch]]
+            output[ch] = [ch, self.frequency_dict[ch], huff_map[ch]]
             # output.append([ch, huff_map[ch], self.frequency_dict[ch]])
         return output
 
