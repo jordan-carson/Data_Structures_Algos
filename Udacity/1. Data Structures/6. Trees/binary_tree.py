@@ -103,6 +103,7 @@ class BinarySearchTree:
             return self.get_predessesor(node.right_child)
         return node
 
+
 bst = BinarySearchTree()
 bst.insert(10)
 bst.insert(13)
