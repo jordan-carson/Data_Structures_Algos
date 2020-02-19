@@ -46,6 +46,16 @@ def sqrt(number):
     return ans
 
 
+def sqrt(number):
+    if not isinstance(number, (int, float)):
+        return None
+    if number in [0, 1]:
+        return number
+    return int(number ** (1.0/2))
+
+
+
+
 print ("Pass" if  (3 == sqrt(9)) else "Fail")
 print ("Pass" if  (0 == sqrt(0)) else "Fail")
 print ("Pass" if  (4 == sqrt(16)) else "Fail")
