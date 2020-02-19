@@ -26,6 +26,11 @@ def rearrange_digits(input_list):
     Returns:
        (int),(int): Two maximum sums
     """
+
+    # what we can do is put all of the elements in the input list into a MaxHeap so the largest number is
+    # the root node, then we can pop each element off one at a time and put all the even ones together and the
+    # odd ones together, simple
+
     pass
 
 def test_function(test_case):
