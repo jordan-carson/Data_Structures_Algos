@@ -14,7 +14,7 @@ Here is some boilerplate code and test cases to start with:
 """
 
 
-class MaxHeap:
+class CustomHeap:
     def __init__(self, initial_size=10, heap_property=max):
         self.complete_binary_tree = [None for _ in range(initial_size)]
         self.next_index = 0
@@ -117,7 +117,6 @@ class MaxHeap:
                 parent = right_child_index
 
 
-
 def rearrange_digits(input_list):
     """
     Rearrange Array Elements so as to form two number such that their sum is
@@ -129,7 +128,7 @@ def rearrange_digits(input_list):
     """
     if len(input_list) == 0 or input_list in [None, list()]:
         return None
-    max_heap = MaxHeap(len(input_list))
+    max_heap = CustomHeap(len(input_list), heap_property=max)
     for input in input_list:
         max_heap.insert(input)
 
