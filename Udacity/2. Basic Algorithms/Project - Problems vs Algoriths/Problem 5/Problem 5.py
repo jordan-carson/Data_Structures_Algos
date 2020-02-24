@@ -1,25 +1,87 @@
-def rearrange_digits(input_list):
-    """
-    Rearrange Array Elements so as to form two number such that their sum is maximum.
+from collections import defaultdict
 
-    Args:
-       input_list(list): Input List
-    Returns:
-       (int),(int): Two maximum sums
-    """
-    pass
 
-def test_function(test_case):
-    output = rearrange_digits(test_case[0])
-    solution = test_case[1]
-    if sum(output) == sum(solution):
-        print("Pass")
-    else:
-        print("Fail")
+class TrieNode:
+    def __init__(self):
+        self.children = defaultdict(TrieNode)
+        self.is_word = False
 
-test_function([[1, 2, 3, 4, 5], [542, 31]])
-test_case = [[4, 6, 2, 5, 9, 8], [964, 852]]
+    ## Initialize this node in the Trie
+    def suffixes(self, suffix=''):
+        suffixes = list()
+        for char, node in self.children.items():
+            if node.is_word is True:
+                suffixes.append(suffix + char)
+            if node.children:
+                suffixes.extend(node.suffixes(suffix + char))
+        return suffixes
 
-# from heapq import he
-import heapq
 
+## Recursive function that collects the suffix for
+## all complete words below this point
+
+
+class Trie:
+    def __init__(self):
+        self.root = TrieNode()
+    ## Initialize this Trie (add a root node)
+
+    def insert(self, word):
+        current_node = self.root
+        for char in word:
+            if char not in current_node.children:
+                current_node.children[char] = TrieNode()
+            current_node = current_node.children[char]
+        current_node.is_word = True
+
+    def find(self, word):
+        """
+        Check if word exists in trie
+        """
+        current_node = self.root
+
+        for char in word:
+            if char not in current_node.children:
+                return False
+
+            current_node = current_node.children[char]
+
+        return current_node.is_word
+
+
+trie = Trie()
+wordList = [
+    "ant", "anthology", "antagonist", "antonym",
+    "fun", "function", "factory",
+    "trie", "trigger", "trigonometry", "tripod"
+]
+for word in wordList:
+    trie.insert(word)
+
+# Find
+assert type(trie.find("a")) is TrieNode
+assert trie.find("b") is None
+
+# Exists
+assert trie.exists("ant") is True
+assert trie.exists("tripod") is True
+assert trie.exists("anthony") is False
+assert trie.exists("bob") is False
+
+
+# Suffixes
+node = trie.find("a")
+assert node.suffixes() == ["nt", "nthology", "ntagonist", "ntonym"]
+
+node = trie.find("")
+assert node.suffixes() == [
+    "ant", "anthology", "antagonist", "antonym",
+    "fun", "function", "factory",
+    "trie", "trigger", "trigonometry", "tripod"
+]
+
+node = trie.find("facto")
+assert node.suffixes() == ["ry"]
+
+node = trie.find("factory")
+assert node.suffixes() == []

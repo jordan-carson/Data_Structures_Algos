@@ -1,4 +1,5 @@
 def swap(l, a, b):
+    # print(f'{a} swaps with  {b}.')
     l[a], l[b] = l[b], l[a]
     return l
 
