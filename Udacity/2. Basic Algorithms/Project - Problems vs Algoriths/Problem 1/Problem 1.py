@@ -10,7 +10,6 @@ The expected time complexity is O(log(n))
 
 Here is some boilerplate code and test cases to start with:
 """
-import numpy as np
 
 
 def sqrt(number):
@@ -46,7 +45,7 @@ def sqrt(number):
     return ans
 
 
-def sqrt(number):
+def sqrt_fast(number):
     if not isinstance(number, (int, float)):
         return None
     if number in [0, 1]:
