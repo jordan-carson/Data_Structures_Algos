@@ -1,5 +1,5 @@
 from collections import defaultdict
-
+from typing import Union, List
 
 class TrieNode:
     def __init__(self):
@@ -27,6 +27,7 @@ class Trie:
     ## Initialize this Trie (add a root node)
 
     def insert(self, word):
+        # simplifying the insert operation
         current_node = self.root
         for char in word:
             if char not in current_node.children:
@@ -34,20 +35,30 @@ class Trie:
             current_node = current_node.children[char]
         current_node.is_word = True
 
-    def find(self, word):
+    def find(self, prefix):
         """
         Check if word exists in trie
         """
         current_node = self.root
 
-        for char in word:
-            if char not in current_node.children:
-                return False
+        for char in prefix:
+            if char in current_node.children:
+                current_node = current_node.children[char]
+            else:
+                return None
+        return current_node
 
-            current_node = current_node.children[char]
-
-        return current_node.is_word
-
+    def does_word_exist(self, word) -> bool:
+        """
+        Does this word exist in our trie?
+        @param word: word
+        @return: Boolean
+        """
+        node = self.find(word)
+        if node:
+            return node.is_word
+        else:
+            return False
 
 trie = Trie()
 wordList = [
@@ -55,33 +66,43 @@ wordList = [
     "fun", "function", "factory",
     "trie", "trigger", "trigonometry", "tripod"
 ]
+
 for word in wordList:
     trie.insert(word)
 
-# Find
-assert type(trie.find("a")) is TrieNode
-assert trie.find("b") is None
 
-# Exists
-assert trie.exists("ant") is True
-assert trie.exists("tripod") is True
-assert trie.exists("anthony") is False
-assert trie.exists("bob") is False
+assert trie.does_word_exist('ant') is True
 
 
-# Suffixes
+# Testing Suffixes
 node = trie.find("a")
-assert node.suffixes() == ["nt", "nthology", "ntagonist", "ntonym"]
+# print(node.suffixes()) # ['nt', 'nthology', 'ntagonist', 'ntonym']
+assert node.suffixes() == ['nt', 'nthology', 'ntagonist', 'ntonym']
 
-node = trie.find("")
-assert node.suffixes() == [
-    "ant", "anthology", "antagonist", "antonym",
-    "fun", "function", "factory",
-    "trie", "trigger", "trigonometry", "tripod"
-]
+node = trie.find("f")
+# print(node.suffixes()) # ['un', 'unction', 'actory']
+assert node.suffixes() == ['un', 'unction', 'actory']
 
-node = trie.find("facto")
-assert node.suffixes() == ["ry"]
+node = trie.find('')
+# print(node.suffixes()) # ['ant', 'anthology', 'antagonist', 'antonym', 'fun', 'function', 'factory', 'trie', 'trigger', 'trigonometry', 'tripod']
+assert node.suffixes() == ['ant', 'anthology', 'antagonist', 'antonym', 'fun', 'function', 'factory', 'trie', 'trigger', 'trigonometry', 'tripod']
 
-node = trie.find("factory")
-assert node.suffixes() == []
+
+# Testing does_word_exist(word) method
+assert trie.does_word_exist('ant') is True
+assert trie.does_word_exist('factory') is True
+assert trie.does_word_exist('jordan') is False
+
+# from ipywidgets import widgets
+# from IPython.display import display
+# from ipywidgets import interact
+# def f(prefix):
+#     if prefix != '':
+#         prefixNode = MyTrie.find(prefix)
+#         if prefixNode:
+#             print('\n'.join(prefixNode.suffixes()))
+#         else:
+#             print(prefix + " not found")
+#     else:
+#         print('')
+# interact(f,prefix='');

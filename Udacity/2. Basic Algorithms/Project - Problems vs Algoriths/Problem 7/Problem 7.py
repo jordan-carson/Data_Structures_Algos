@@ -1,6 +1,18 @@
 from collections import defaultdict
 
+
 # RouteTrie.handler is similar to Trie.is_word
+class CustomException(Exception):
+    def __init__(self, msg):
+        self.msg = msg
+
+    def __str__(self):
+        return self.msg
+
+
+class HTTP404Error(CustomException):
+    def __init__(self):
+        super().__init__(msg="404 page not found response")
 
 
 # A RouteTrie will store our routes and their associated handlers
@@ -47,8 +59,15 @@ class Router:
     def __init__(self, handler, not_found_handler=None):
         self.route_trie = RouteTrie(handler=handler)
         self.not_found_handler = not_found_handler
+        self.handler = handler
     # Create a new RouteTrie for holding our routes
     # You could also add a handler for 404 page not found responses as well!
+        self.check_handler()
+
+    def check_handler(self):
+        if self.handler == '404':
+            raise HTTP404Error
+        # else:
 
     def add_handler(self, path, handler):
         parts = self.split_path(path)

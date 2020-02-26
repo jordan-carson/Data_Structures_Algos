@@ -27,9 +27,9 @@ def sort_012(input_list):
             swap(input_list, middle, end)
             end -= 1
     # print(begin, middle, end)
-    print(f'The 0s begin at index {0} and end at index {begin - 1}')
-    print(f'The 1s begin at index {begin} and end at index {middle -1}')
-    print(f'The 2s begin at index {middle} and end at index {len(input_list) -1} or {-end}')
+    # print(f'The 0s begin at index {0} and end at index {begin - 1}')
+    # print(f'The 1s begin at index {begin} and end at index {middle -1}')
+    # print(f'The 2s begin at index {middle} and end at index {len(input_list) -1} or {-end}')
     return input_list
 
 
