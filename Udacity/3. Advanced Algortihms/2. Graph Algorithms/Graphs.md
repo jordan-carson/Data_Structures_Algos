@@ -41,3 +41,14 @@ the number of vertices. We actually visit every edge twice, once to explore it
 and once traveling back through it. The V is added to account for the time taken
 to look up a vertex. 
 
+### Breath-First Search
+
+BFS is quite similar, but here you search every edge of one node before continuing on with the graph.
+We first start at a node, we mark that off as visited, and add it to our queue. 
+Recall the difference between a queue and a stack. For a queue, we'll remove the first
+element we put in it, but for a stack we remove the most recently added element. 
+We go back to the first node and visit everything adjacent to it, marking each as
+seen and adding them to a queue. When we've run out of edges we can just dequeue a node
+from the queue and use that as our starting place. We look at every node adjacent to that
+one, and adding each one to the stack until we've exhausted our options. It's important
+to note that when we dequeue, 
