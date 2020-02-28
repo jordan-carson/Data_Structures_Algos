@@ -3,6 +3,8 @@
 # The following Solution makes use of one of Python's PriorityQueue implementation (heapq)
 # For more details - https://thomas-cokelaer.info/tutorials/python/module_heapq.html
 import heapq
+
+
 def create_graph(num_islands, bridge_config):
     """
     Helper function to create graph using adjacency list implementation
@@ -17,6 +19,7 @@ def create_graph(num_islands, bridge_config):
         adjacency_list[destination].append((source, cost))
 
     return adjacency_list
+
 
 def minimum_cost(graph):
     """
@@ -51,6 +54,8 @@ def minimum_cost(graph):
 
     return total_cost
 
+
 def get_minimum_cost_of_connecting(num_islands, bridge_config):
     graph = create_graph(num_islands, bridge_config)
     return minimum_cost(graph)
+

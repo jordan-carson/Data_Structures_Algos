@@ -1,4 +1,7 @@
-def dijkstra(start_node, end_node):
+import math
+
+
+def dijkstra(graph, start_node, end_node):
     distance_dict = {node: math.inf for node in graph.nodes}
     shortest_path_to_node = {}
 
@@ -13,5 +16,5 @@ def dijkstra(start_node, end_node):
                 new_node_distance = node_distance + edge.distance
                 if distance_dict[edge.node] > new_node_distance:
                     distance_dict[edge.node] = new_node_distance
-    
+
     return shortest_path_to_node[end_node]
