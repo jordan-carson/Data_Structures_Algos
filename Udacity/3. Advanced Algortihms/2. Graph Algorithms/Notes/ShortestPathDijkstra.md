@@ -21,7 +21,7 @@ whenever we discover a node and have an actual distance to store. The node we're
 will have a distance of zero. A common implementation of dijkstra's uses a min priority queue, where the element
 with a minimum priority, or minimum distance in our case, can be removed efficiently. 
 
-We store all of our nodes in the priority queue and use `extract min` to take out the minimum element the only one with 
+We store all of our nodes in the priority queue and use `extract_min` to take out the minimum element the only one with 
 a distance of zero. 
 
 From our starting node we have several options. We will follow each edge and update the node on the other
