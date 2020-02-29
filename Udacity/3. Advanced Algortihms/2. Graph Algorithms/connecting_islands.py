@@ -14,8 +14,8 @@ def create_graph(num_islands, bridge_config):
 
 
 def get_minimum_cost(graph):
-    # set starting vertex to 0
-    start_vertex = 0
+    # set starting vertex to 1 - NOT 0
+    start_vertex = 1
     # initialize a list of Booleans (False) for the visited list
     visited = [False for _ in range(len(graph) + 1)]
 
@@ -52,3 +52,37 @@ def get_minimum_cost_of_connecting(num_islands, bridge_config):
 
     return get_minimum_cost(graph)
 
+
+if __name__ == '__main__':
+    def test_function(test_case):
+        num_islands = test_case[0]
+        bridge_config = test_case[1]
+        solution = test_case[2]
+        output = get_minimum_cost_of_connecting(num_islands, bridge_config)
+
+        if output == solution:
+            print("Pass")
+        else:
+            print("Fail")
+
+
+    num_islands = 4
+    bridge_config = [[1, 2, 1], [2, 3, 4], [1, 4, 3], [4, 3, 2], [1, 3, 10]]
+    solution = 6
+
+    test_case = [num_islands, bridge_config, solution]
+    test_function(test_case)
+
+    num_islands = 5
+    bridge_config = [[1, 2, 5], [1, 3, 8], [2, 3, 9]]
+    solution = 13
+
+    test_case = [num_islands, bridge_config, solution]
+    test_function(test_case)
+
+    num_islands = 5
+    bridge_config = [[1, 2, 3], [1, 5, 9], [2, 3, 10], [4, 3, 9]]
+    solution = 31
+
+    test_case = [num_islands, bridge_config, solution]
+    test_function(test_case)
