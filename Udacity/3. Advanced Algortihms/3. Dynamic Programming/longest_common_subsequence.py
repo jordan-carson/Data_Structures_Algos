@@ -2,6 +2,7 @@
 # is dominated by the two nested loops,
 # which give us an O(N^2) time complexity.
 
+
 def lcs_mine(string_a, string_b):
     mem = [[0 for _ in range(len(string_b)+1)] for _ in range(len(string_a)+1)]
     for i in range(len(string_a)+1):
@@ -48,7 +49,9 @@ test_B2 = "DOGSPACEWHO"
 lcs_val2 = lcs_mine(test_A2, test_B2)
 
 print('LCS val 1 = ', lcs_val1)
+
 assert lcs_val1==5, "Incorrect LCS value."
 print('LCS val 2 = ', lcs_val2)
+
 assert lcs_val2==7, "Incorrect LCS value."
 print('Tests passed!')
