@@ -4,8 +4,12 @@ This problem I decided to solve two different ways.
 
 `sqrt()` 
 
-Time Complexity: The time complexity is O(n), as we loop through the entire number -> n, until we reach the mid_squared.
-Space Complexity: Memory is independent to input. Each loop run is independent. 
+Time Complexity: 
+The time complexity is O(log n), as we loop through the entire number -> n, until we reach the mid_squared.
+
+Space Complexity: 
+Memory is independent to input. Each loop run is independent, and since this
+is iterative the auxiliary memory is O(1). 
 
 `sqrt_fast()
 `

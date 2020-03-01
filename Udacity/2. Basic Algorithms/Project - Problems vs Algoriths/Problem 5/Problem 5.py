@@ -60,49 +60,51 @@ class Trie:
         else:
             return False
 
-trie = Trie()
-wordList = [
-    "ant", "anthology", "antagonist", "antonym",
-    "fun", "function", "factory",
-    "trie", "trigger", "trigonometry", "tripod"
-]
 
-for word in wordList:
-    trie.insert(word)
+if __name__ == '__main__':
+    # Add words
 
+    trie = Trie()
+    wordList = [
+        "ant", "anthology", "antagonist", "antonym",
+        "fun", "function", "factory",
+        "trie", "trigger", "trigonometry", "tripod"
+    ]
 
-assert trie.does_word_exist('ant') is True
+    for word in wordList:
+        trie.insert(word)
 
+    assert trie.does_word_exist('ant') is True
 
-# Testing Suffixes
-node = trie.find("a")
-# print(node.suffixes()) # ['nt', 'nthology', 'ntagonist', 'ntonym']
-assert node.suffixes() == ['nt', 'nthology', 'ntagonist', 'ntonym']
+    # Testing Suffixes
+    node = trie.find("a")
+    # print(node.suffixes()) # ['nt', 'nthology', 'ntagonist', 'ntonym']
+    assert node.suffixes() == ['nt', 'nthology', 'ntagonist', 'ntonym']
 
-node = trie.find("f")
-# print(node.suffixes()) # ['un', 'unction', 'actory']
-assert node.suffixes() == ['un', 'unction', 'actory']
+    node = trie.find("f")
+    # print(node.suffixes()) # ['un', 'unction', 'actory']
+    assert node.suffixes() == ['un', 'unction', 'actory']
 
-node = trie.find('')
-# print(node.suffixes()) # ['ant', 'anthology', 'antagonist', 'antonym', 'fun', 'function', 'factory', 'trie', 'trigger', 'trigonometry', 'tripod']
-assert node.suffixes() == ['ant', 'anthology', 'antagonist', 'antonym', 'fun', 'function', 'factory', 'trie', 'trigger', 'trigonometry', 'tripod']
+    node = trie.find('')
+    # print(node.suffixes()) # ['ant', 'anthology', 'antagonist', 'antonym', 'fun', 'function', 'factory', 'trie', 'trigger', 'trigonometry', 'tripod']
+    assert node.suffixes() == ['ant', 'anthology', 'antagonist', 'antonym', 'fun', 'function', 'factory', 'trie',
+                               'trigger', 'trigonometry', 'tripod']
 
+    # Testing does_word_exist(word) method
+    assert trie.does_word_exist('ant') is True
+    assert trie.does_word_exist('factory') is True
+    assert trie.does_word_exist('jordan') is False
 
-# Testing does_word_exist(word) method
-assert trie.does_word_exist('ant') is True
-assert trie.does_word_exist('factory') is True
-assert trie.does_word_exist('jordan') is False
-
-# from ipywidgets import widgets
-# from IPython.display import display
-# from ipywidgets import interact
-# def f(prefix):
-#     if prefix != '':
-#         prefixNode = MyTrie.find(prefix)
-#         if prefixNode:
-#             print('\n'.join(prefixNode.suffixes()))
-#         else:
-#             print(prefix + " not found")
-#     else:
-#         print('')
-# interact(f,prefix='');
+    # from ipywidgets import widgets
+    # from IPython.display import display
+    # from ipywidgets import interact
+    # def f(prefix):
+    #     if prefix != '':
+    #         prefixNode = MyTrie.find(prefix)
+    #         if prefixNode:
+    #             print('\n'.join(prefixNode.suffixes()))
+    #         else:
+    #             print(prefix + " not found")
+    #     else:
+    #         print('')
+    # interact(f,prefix='');

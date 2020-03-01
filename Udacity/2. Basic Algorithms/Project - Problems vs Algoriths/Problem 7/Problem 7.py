@@ -62,12 +62,10 @@ class Router:
         self.handler = handler
     # Create a new RouteTrie for holding our routes
     # You could also add a handler for 404 page not found responses as well!
-        self.check_handler()
 
-    def check_handler(self):
-        if self.handler == '404':
-            raise HTTP404Error
-        # else:
+    def check_handler(self, handler):
+        if handler in ['HTTP404', '404 page not found', 'not found handler']:
+            return '404 page not found'
 
     def add_handler(self, path, handler):
         parts = self.split_path(path)
@@ -80,7 +78,12 @@ class Router:
         # first split the path
         parts = self.split_path(path)
         handler = self.route_trie.find(parts)
-        return handler if handler is not None else self.not_found_handler
+        if handler is not None:
+            return handler
+        else:
+            # raise HTTP404Error
+            return self.check_handler(self.not_found_handler)
+        # return handler if handler is not None else self.not_found_handler
         # DONE: lookup path (by parts) and return the associated handler
         # DONE: you can return None if it's not found or
         # DONE: return the "not found" handler if you added one -> add this to our init
@@ -98,9 +101,9 @@ class Router:
 # both the add_handler and loopup functions,
 # so it should be placed in a function here
 
+
 if __name__ == '__main__':
     # Here are some test cases and expected outputs you can use to test your implementation
-
     # create the router and add a route
     router = Router("root handler", "not found handler") # remove the 'not found handler' if you did not implement this
     router.add_handler("/home/about", "about handler")  # add a route
@@ -112,4 +115,8 @@ if __name__ == '__main__':
     print(router.lookup("/home/about/")) # should print 'about handler' or None if you did not handle trailing slashes
     print(router.lookup("/home/about/me")) # should print 'not found handler' or None if you did not implement one
 
+    # Testing the 404....
+    router = Router('root handler', 'not found handler')
+    router.add_handler("/home/about/jordan", 'jordan handler')
+    print(router.lookup("/home/about/jordan/page")) # 404 page not found
 

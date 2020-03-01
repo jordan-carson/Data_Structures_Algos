@@ -16,4 +16,3 @@ Insert method is the same as the add_handler method, as the add_handler calls th
 
 The rest of the methods do not require any additional memory, thus the remaining methods happen in constant time
 O(1).
-

@@ -121,32 +121,40 @@ def rearrange_digits(input_list):
     """
     Rearrange Array Elements so as to form two number such that their sum is
     maximum.
+
     Args:
        input_list(list): Input List
     Returns:
        (int),(int): Two maximum sums
     """
-    if len(input_list) == 0 or input_list in [None, list()]:
+    if len(input_list) == 0 or input_list == []:
         return None
+
+    # Create our MaxHeap Structure with the size of the input list
     max_heap = CustomHeap(len(input_list), heap_property=max)
+
+    # add all the elements into our max heap
     for input in input_list:
         max_heap.insert(input)
 
-    first = ''
-    second = ''
-
+    # first, second = list(), list()
+    first, second = '', ''
     for i in range(len(max_heap)):
+        # Remove one at a time and put all the even together, and odd together (makes this much easier)
         if i % 2 == 0:
             first += str(max_heap.remove())
+            # first.append(max_heap.remove())
         else:
             second += str(max_heap.remove())
-
+            # second.append(max_heap.remove())
+    # print(first, second)
+    # return [int(''.join(str(i) for i in first)), int(''.join(str(i) for i in second))]
     return [int(first), int(second)]
 
 
 if __name__ == '__main__':
-
-    def test_function(test_case):
+    # renamed function as PyCharm runs pytest with any function named `test_...`
+    def t_func(test_case):
         output = rearrange_digits(test_case[0])
         solution = test_case[1]
         if sum(output) == sum(solution):
@@ -154,6 +162,18 @@ if __name__ == '__main__':
         else:
             print("Fail")
 
-    test_function([[1, 2, 3, 4, 5], [542, 31]])
-    test_function([[4, 6, 2, 5, 9, 8], [964, 852]])
-    test_function([[6, 7, 8, 9, 10], [97, 1086]]) # sum is 1183
+    # General Tests
+    t_func([[1, 2, 3, 4, 5], [542, 31]])
+    t_func([[4, 6, 2, 5, 9, 8], [964, 852]])
+
+    # Edge Cases
+    t_func([[1, 1, 1], [11, 1]])
+    t_func([[1, 1], [1, 1]])
+    t_func([[2, 2], [2, 2]])
+
+    # Random Other Tests
+    t_func([[20, 19, 18, 17, 16, 15, 14], [20181614, 191715]])
+    t_func([[1, 2, 3, 4], [42, 31]])
+    t_func([[1, 1, 2, 2, 3, 3, 4, 4], [4321, 4321]])
+    t_func([[0, 0, 0, 0, 1, 1, 1, 1], [1100, 1100]])
+
