@@ -35,6 +35,25 @@ class Graph(object):
             node2.remove_child(node1)
 
 
+def dijkstra(start_node, end_node):
+    distance_dict = {node: math.inf for node in graph.nodes}
+    shortest_path_to_node = {}
+    distance_dict[start_node] = 0
+
+    while distance_dict:
+
+        # pop the shortest path
+        current_node, node_distance = sorted(distance_dict.items(), key=lambda x: x[1])[0]
+        shortest_path_to_node[current_node] = distance_dict.pop(current_node)
+
+        for edge in current_node.edges:
+            if edge.node in distance_dict:
+                new_node_distance = node_distance + edge.distance
+                if distance_dict[edge.node] > new_node_distance:
+                    distance_dict[edge.node] = new_node_distance
+    return shortest_path_to_node[end_node]
+
+
 if __name__ == '__main__':
     node_u = GraphNode('U')
     node_d = GraphNode('D')
@@ -64,26 +83,4 @@ if __name__ == '__main__':
     graph.add_edge(node_y, node_i, 4)
     graph.add_edge(node_y, node_t, 5)
 
-    import math
-
-
-    def dijkstra(start_node, end_node):
-        distance_dict = {node: math.inf for node in graph.nodes}
-        shortest_path_to_node = {}
-        distance_dict[start_node] = 0
-
-        while distance_dict:
-
-            # pop the shortest path
-            current_node, node_distance = sorted(distance_dict.items(), key=lambda x: x[1])[0]
-            shortest_path_to_node[current_node] = distance_dict.pop(current_node)
-
-            for edge in current_node.edges:
-                if edge.node in distance_dict:
-                    new_node_distance = node_distance + edge.distance
-                    if distance_dict[edge.node] > new_node_distance:
-                        distance_dict[edge.node] = new_node_distance
-        return shortest_path_to_node[end_node]
-
-
-    print('Shortest Distance from {} to {} is {}'.format(node_u.value, node_y.value, dijkstra(node_u, node_y)))
+    print(f'Shortest Distance from {node_u.value} to {node_y.value} is {dijkstra(node_u, node_y)}.')
