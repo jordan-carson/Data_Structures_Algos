@@ -73,7 +73,7 @@ class Solution:
         self.x_len = len(self.grid)
         self.y_len = len(self.grid[0])
 
-    def append_if(self, queue, x, y):
+    def append_to(self, queue, x, y):
         """Append to the queue only if in bounds of the grid and the cell value is 1."""
         if x < len(self.grid) and y < len(self.grid[0]):
             if self.grid[x][y] == '1':
@@ -88,10 +88,11 @@ class Solution:
             x, y = queue.pop()
             self.grid[x][y] = '2'
 
-            self.append_if(queue, x - 1, y) #down
-            self.append_if(queue, x, y - 1) #left
-            self.append_if(queue, x + 1, y) #up
-            self.append_if(queue, x, y + 1) #right
+            self.append_to(queue, x - 1, y)  # down
+            self.append_to(queue, x, y - 1)  # left
+            self.append_to(queue, x + 1, y)  # up
+            self.append_to(queue, x, y + 1)  # right
+            print(queue)
 
     def numIslands(self):
         """
