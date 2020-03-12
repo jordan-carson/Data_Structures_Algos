@@ -3,6 +3,7 @@
 
 # from .priority_queue import PriorityQueue
 import heapq
+from Data_Structures_Algos.Udacity.Advanced_Algortihms.project_route_planner.priority_queue import PriorityQueue
 
 """
 
@@ -52,6 +53,21 @@ def shortest_path(M, start, goal):
 
 def dikstras(graph, start, end):
     raise NotImplementedError
+
+
+def distance(x, y):
+    return ((y[0] - x[0])**2 + (y[1] - x[1])**2)**(1/2)
+
+
+# def a_star_final(graph, start, goal):
+#     queue = PriorityQueue()
+#     queue.enqueue(start, 0)
+#
+#     explored
+
+
+
+
 
 
 def a_star(graph, start, goal):
