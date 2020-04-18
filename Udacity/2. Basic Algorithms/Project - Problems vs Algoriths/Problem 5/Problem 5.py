@@ -1,6 +1,7 @@
 from collections import defaultdict
 from typing import Union, List
 
+
 class TrieNode:
     def __init__(self):
         self.children = defaultdict(TrieNode)
@@ -77,10 +78,11 @@ if __name__ == '__main__':
     assert trie.does_word_exist('ant') is True
 
     # Testing Suffixes
-    node = trie.find("a")
-    # print(node.suffixes()) # ['nt', 'nthology', 'ntagonist', 'ntonym']
-    assert node.suffixes() == ['nt', 'nthology', 'ntagonist', 'ntonym']
-
+    node = trie.find("t")
+    # suffixes, counter = node.suffixes()
+    print(node.suffixes()) # ['nt', 'nthology', 'ntagonist', 'ntonym']
+    print(node.counter)
+    # assert node.suffixes() == ['nt', 'nthology', 'ntagonist', 'ntonym']
     node = trie.find("f")
     # print(node.suffixes()) # ['un', 'unction', 'actory']
     assert node.suffixes() == ['un', 'unction', 'actory']

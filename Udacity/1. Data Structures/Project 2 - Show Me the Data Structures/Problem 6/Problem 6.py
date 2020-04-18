@@ -102,7 +102,7 @@ def union(list1, list2):
 
 def intersection(list1, list2):
     """
-    An intersection between two lists are the common items between the two lists.
+    An intersection between two lists are the rice_notgit items between the two lists.
     Lets try to solve this in Linear time.
     @param list1:
     @param list2:

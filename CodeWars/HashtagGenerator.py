@@ -6,4 +6,4 @@ def generate_hashtag_theirs(s):
     return s and not len(ans) > 140 and ans or False
 
 
-print(generate_hashtag_theirs('         codewars  is  nice'))
+print(generate_hashtag_theirs('         CodeWars  is  nice'))
